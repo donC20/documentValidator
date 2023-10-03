@@ -3,4 +3,3 @@ flask
 pytesseract
 tensorflow
 opencv-python
-tesseract-ocr
