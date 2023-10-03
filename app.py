@@ -2,7 +2,7 @@ from flask import Flask, jsonify, request
 import cv2
 import pytesseract
 import numpy as np  
-import tensorflow as tf
+import tensorflow as tf 
 # Set Tesseract path
 # pytesseract.pytesseract.tesseract_cmd = r'F:\SDKs\pytesseract\tesseract.exe'
 pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'
