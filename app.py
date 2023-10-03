@@ -5,7 +5,7 @@ import numpy as np
 import tensorflow as tf 
 # Set Tesseract path
 # pytesseract.pytesseract.tesseract_cmd = r'F:\SDKs\pytesseract\tesseract.exe'
-pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'
+pytesseract.pytesseract.tesseract_cmd = 'pytesseract/tesseract.exe'
 
 app = Flask(__name__)
 
