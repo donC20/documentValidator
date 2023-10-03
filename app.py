@@ -4,7 +4,9 @@ import pytesseract
 import numpy as np  
 import tensorflow as tf
 # Set Tesseract path
-pytesseract.pytesseract.tesseract_cmd = r'F:\SDKs\pytesseract\tesseract.exe'
+# pytesseract.pytesseract.tesseract_cmd = r'F:\SDKs\pytesseract\tesseract.exe'
+pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'
+
 app = Flask(__name__)
 
 # Load the TFLite model
