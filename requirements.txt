@@ -3,4 +3,4 @@ flask
 pytesseract
 tensorflow
 opencv-python
-apt-get install tesseract-ocr
+tesseract-ocr
