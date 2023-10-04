@@ -76,9 +76,11 @@ def predict():
     if request.method == 'POST':
         data = request.get_json()
         image_url = data.get('image_url')
+        print("Received image_url:", image_url)
         return predictByImageFromURL(image_url)
     elif request.method == 'GET':
         image_url = request.args.get('image_url')
+        print("Received image_url:", image_url)
         return predictByImageFromURL(image_url)
     else:
         return jsonify({"error": "Invalid request method"}), 405
