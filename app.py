@@ -50,13 +50,16 @@ def predictByImageFromURL(image_url):
     # Preprocess the input image
     input_image = preprocess_image_from_url(image_url)
     class_labels = ["Aadhaar", "PAN", "Driving Licence", "Voter ID", "Passport", "Utility", "credit_cards"]
-
+    print(class_labels)
     # Run the inference
     interpreter.set_tensor(input_details[0]['index'], input_image)
     interpreter.invoke()
     predictions = interpreter.get_tensor(output_details[0]['index'])
+    print(predictions)
 
     predicted_class_index = np.argmax(predictions)
+    print(predicted_class_index)
+    
     predicted_class = class_labels[predicted_class_index]
     if predicted_class == "Aadhaar":
         response = requests.get(image_url)
