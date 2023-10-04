@@ -4,6 +4,7 @@ import pytesseract
 import numpy as np  
 import tensorflow as tf 
 import requests
+import re
 from io import BytesIO
 
 # Set Tesseract path
@@ -27,6 +28,24 @@ def preprocess_image_from_url(image_url):
     img = np.expand_dims(img, axis=0)
     return img
 
+
+def extract_information(text):
+    patterns = {
+       'name': r'(?i)([A-Z][a-z]+(\s[A-Z][a-z]+)+)',
+        'dob': r'(?i)(\d{2}/\d{2}/\d{4})',
+        'gender': r'(?i)(Male|Female)',
+        'id_number': r'(\d{4}\s\d{4}\s\d{4})'
+    }
+
+    info = {}
+
+    for key, pattern in patterns.items():
+        match = re.search(pattern, text)
+        if match:
+            info[key] = match.group(1)
+
+    return info
+
 def predictByImageFromURL(image_url):
     # Preprocess the input image
     input_image = preprocess_image_from_url(image_url)
@@ -44,7 +63,11 @@ def predictByImageFromURL(image_url):
         img = cv2.imdecode(np.frombuffer(response.content, np.uint8), cv2.IMREAD_COLOR)
         image_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         text = pytesseract.image_to_string(image_rgb)
-        return jsonify({"predicted_class": predicted_class, "data": text})
+
+        # Extract information using regular expressions
+        info = extract_information(text)
+
+        return jsonify({"predicted_class": predicted_class, "data": info})
     else:
         return jsonify({"predicted_class": "Not an Aadhar", "data": "unavailable"})
 
